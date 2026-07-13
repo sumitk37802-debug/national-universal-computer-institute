@@ -4,44 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admission - National Universal Computer Institute</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
 
+<link rel="stylesheet" href="css/style.css">
+
+</head>
 <body>
 
 <header>
+
 <div class="logo-box">
 
 <img src="images/logo.jpeg" alt="NUCI Logo">
 
 <div>
 <h1>National Universal Computer Institute</h1>
+
 <p>📍 Near GDC Dewal Billawar | 📞 6006521120, 9797460970</p>
+
 <p>✉ nationaluniversalcomputerinsti@gmail.com</p>
+
 <p>Quality Computer Education For Everyone</p>
 
 </div>
+
 </div>
+
 </header>
 
 <nav>
+
 <ul>
+
 <li><a href="index.html">Home</a></li>
+
 <li><a href="about.html">About</a></li>
+
 <li><a href="courses.html">Courses</a></li>
+
 <li><a href="admission.html">Admission</a></li>
+
 <li><a href="gallery.html">Gallery</a></li>
+
 <li><a href="result.html">Result</a></li>
+
 <li><a href="verify.html">Verify Certificate</a></li>
+
 <li><a href="contact.html">Contact</a></li>
+
 </ul>
+
 </nav>
 
 <section class="services">
 
 <h2>Online Admission Form</h2>
 
-<form action="https://script.google.com/macros/s/AKfycbwqyRHhdjFX86o2f2DvxJptxJj7Ot6lX5oywohlLChauQ_DztyAoZgT_S-c_ozY4bnojw/exec" method="POST">
+<form id="admissionForm">
 
 <label>Student Name</label>
 <input type="text" name="name" placeholder="Enter Full Name" required>
@@ -54,30 +72,48 @@
 
 <label>Email Address</label>
 <input type="email" name="email" placeholder="Enter Email">
+
 <label>Date of Birth</label>
 <input type="date" name="dob" required>
 
 <label>Gender</label>
+
 <select name="gender" required>
-    <option value="">Select Gender</option>
-    <option>Male</option>
-    <option>Female</option>
-    <option>Other</option>
+
+<option value="">Select Gender</option>
+
+<option>Male</option>
+
+<option>Female</option>
+
+<option>Other</option>
+
 </select>
+
 <label>Select Course</label>
 
 <select name="course" required>
+
 <option>DCA</option>
+
 <option>ADCA</option>
+
 <option>Tally Prime + GST</option>
+
 <option>MS Office</option>
+
 <option>Web Designing</option>
+
 <option>Python Programming</option>
+
 </select>
 
 <label>Address</label>
+
 <textarea name="address" rows="4" placeholder="Enter Address"></textarea>
+
 <input type="hidden" name="date" id="date">
+
 <input type="submit" value="Submit Admission Form">
 
 </form>
@@ -85,10 +121,97 @@
 </section>
 
 <footer>
+
 <p>© 2026 National Universal Computer Institute | All Rights Reserved.</p>
+
 </footer>
+
 <script>
-document.getElementById("date").value = new Date().toLocaleDateString("en-GB");
+
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwqyRHhdjFX86o2f2DvxJptxJj7Ot6lX5oywohlLChauQ_DztyAoZgT_S-c_ozY4bnojw/exec";
+
+document.getElementById("date").value =
+new Date().toLocaleDateString("en-GB");
+
+document.getElementById("admissionForm").addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+const submitBtn=this.querySelector("input[type=submit]");
+
+submitBtn.value="Submitting...";
+submitBtn.disabled=true;
+
+const data={
+
+name:this.name.value,
+
+father:this.father.value,
+
+mobile:this.mobile.value,
+
+email:this.email.value,
+
+dob:this.dob.value,
+
+gender:this.gender.value,
+
+course:this.course.value,
+
+address:this.address.value,
+
+date:this.date.value
+
+};
+
+try{
+
+const response=await fetch(SCRIPT_URL,{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(data)
+
+});
+
+const result=await response.json();
+
+if(result.success){
+
+alert("✅ Admission Submitted Successfully!");
+
+this.reset();
+
+document.getElementById("date").value=
+new Date().toLocaleDateString("en-GB");
+
+}else{
+
+alert(result.message || "Submission Failed");
+
+}
+
+}catch(error){
+
+console.error(error);
+
+alert("Server Error!");
+
+}
+
+submitBtn.value="Submit Admission Form";
+
+submitBtn.disabled=false;
+
+});
+
 </script>
+
 </body>
 </html>
