@@ -7,9 +7,9 @@ async function login() {
 
     const response = await fetch(WEB_APP_URL,{
     method:"POST",
-    headers:{
-        "Content-Type":"application/json"
-    },
+    headers: {
+    "Content-Type": "text/plain;charset=utf-8"
+}
     body:JSON.stringify({
         action:"login",
         studentId:studentId,
