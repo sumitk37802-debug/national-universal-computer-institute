@@ -15,9 +15,9 @@
 <img src="images/logo.jpeg" alt="NUCI Logo">
 
 <div class="details">
-    <p>📍 Near GDC Dewal Billawar | 📞 6006521120, 9797460970</p>
-    <p>✉ nationaluniversalcomputerinsti@gmail.com</p>
-    <p>Quality Computer Education For Everyone</p>
+<p>📍 Near GDC Dewal Billawar | 📞 6006521120, 9797460970</p>
+<p>✉ nationaluniversalcomputerinsti@gmail.com</p>
+<p>Quality Computer Education For Everyone</p>
 </div>
 
 </div>
@@ -41,19 +41,19 @@
 
 <h2>Contact Us</h2>
 
-<form>
+<form id="contactForm">
 
 <label>Your Name</label>
-<input type="text" placeholder="Enter Your Name">
+<input type="text" id="name" name="name" placeholder="Enter Your Name" required>
 
 <label>Mobile Number</label>
-<input type="tel" placeholder="Enter Mobile Number">
+<input type="tel" id="mobile" name="mobile" placeholder="Enter Mobile Number" required>
 
 <label>Email</label>
-<input type="email" placeholder="Enter Email">
+<input type="email" id="email" name="email" placeholder="Enter Email" required>
 
 <label>Your Message</label>
-<textarea rows="5" placeholder="Write Your Message"></textarea>
+<textarea id="message" name="message" rows="5" placeholder="Write Your Message" required></textarea>
 
 <input type="submit" value="Send Message">
 
@@ -70,11 +70,69 @@
 <p><b>✉ Email:</b> nationaluniversalcomputerinsti@gmail.com</p>
 
 </div>
+
 </section>
 
 <footer>
 <p>© 2026 National Universal Computer Institute | All Rights Reserved.</p>
 </footer>
+
+<script>
+
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwqyRHhdjFX86o2f2DvxJptxJj7Ot6lX5oywohlLChauQ_DztyAoZgT_S-c_ozY4bnojw/exec";
+
+document.getElementById("contactForm").addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+const btn=this.querySelector("input[type=submit]");
+
+btn.value="Sending...";
+btn.disabled=true;
+
+const formData=new FormData();
+
+formData.append("action","contact");
+formData.append("name",document.getElementById("name").value);
+formData.append("mobile",document.getElementById("mobile").value);
+formData.append("email",document.getElementById("email").value);
+formData.append("message",document.getElementById("message").value);
+
+try{
+
+const response=await fetch(SCRIPT_URL,{
+method:"POST",
+body:formData
+});
+
+const result=await response.json();
+
+if(result.success){
+
+alert("✅ Message Sent Successfully");
+
+document.getElementById("contactForm").reset();
+
+}else{
+
+alert(result.message || "Failed");
+
+}
+
+}catch(err){
+
+console.log(err);
+
+alert("Server Error");
+
+}
+
+btn.value="Send Message";
+btn.disabled=false;
+
+});
+
+</script>
 
 </body>
 </html>
