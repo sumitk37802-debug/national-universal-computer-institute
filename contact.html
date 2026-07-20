@@ -4,7 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact Us - National Universal Computer Institute</title>
+
 <link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("wl5Hs2_O5Puvs27cR");
+</script>
+
 </head>
 
 <body>
@@ -44,16 +52,16 @@
 <form id="contactForm">
 
 <label>Your Name</label>
-<input type="text" id="name" name="name" placeholder="Enter Your Name" required>
+<input type="text" name="name" required>
 
 <label>Mobile Number</label>
-<input type="tel" id="mobile" name="mobile" placeholder="Enter Mobile Number" required>
+<input type="text" name="mobile" required>
 
 <label>Email</label>
-<input type="email" id="email" name="email" placeholder="Enter Email" required>
+<input type="email" name="email" required>
 
 <label>Your Message</label>
-<textarea id="message" name="message" rows="5" placeholder="Write Your Message" required></textarea>
+<textarea name="message" rows="5" required></textarea>
 
 <input type="submit" value="Send Message">
 
@@ -79,9 +87,7 @@
 
 <script>
 
-const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwqyRHhdjFX86o2f2DvxJptxJj7Ot6lX5oywohlLChauQ_DztyAoZgT_S-c_ozY4bnojw/exec";
-
-document.getElementById("contactForm").addEventListener("submit",async function(e){
+document.getElementById("contactForm").addEventListener("submit",function(e){
 
 e.preventDefault();
 
@@ -90,45 +96,33 @@ const btn=this.querySelector("input[type=submit]");
 btn.value="Sending...";
 btn.disabled=true;
 
-const formData=new FormData();
+emailjs.sendForm(
+"service_ta7p9q9",
+"template_8ke35dk",
+this
+)
 
-formData.append("action","contact");
-formData.append("name",document.getElementById("name").value);
-formData.append("mobile",document.getElementById("mobile").value);
-formData.append("email",document.getElementById("email").value);
-formData.append("message",document.getElementById("message").value);
-
-try{
-
-const response=await fetch(SCRIPT_URL,{
-method:"POST",
-body:formData
-});
-
-const result=await response.json();
-
-if(result.success){
+.then(function(){
 
 alert("✅ Message Sent Successfully");
 
 document.getElementById("contactForm").reset();
 
-}else{
+btn.value="Send Message";
+btn.disabled=false;
 
-alert(result.message || "Failed");
+})
 
-}
+.catch(function(error){
 
-}catch(err){
+console.log(error);
 
-console.log(err);
-
-alert("Server Error");
-
-}
+alert("❌ Message Failed");
 
 btn.value="Send Message";
 btn.disabled=false;
+
+});
 
 });
 
