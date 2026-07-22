@@ -22,7 +22,13 @@
 </header>
 
 <nav>
-<ul>
+
+<div class="menu-toggle" onclick="toggleMenu()">
+☰
+</div>
+
+<ul id="menu">
+
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="courses.html">Courses</a></li>
@@ -32,9 +38,10 @@
 <li><a href="verify.html">Verify Certificate</a></li>
 <li><a href="student-login.html">Student Login</a></li>
 <li><a href="contact.html">Contact</a></li>
-</ul>
-</nav>
 
+</ul>
+
+</nav>
 <section class="services">
 
 <style>
@@ -99,6 +106,12 @@ margin-top:20px;
 </div>
 
 <script src="js/login.js"></script>
+<script>
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("show");
+}
+</script>
 
+<script src="js/script.js"></script>
 </body>
 </html>
