@@ -33,19 +33,26 @@
 </header>
 
 <nav>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="admission.html">Admission</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="result.html">Result</a></li>
-        <li><a href="verify.html">Verify Certificate</a></li>
-        <li><a href="student-login.html">Student Login</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
-</nav>
 
+<div class="menu-toggle" onclick="toggleMenu()">
+☰
+</div>
+
+<ul id="menu">
+
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="courses.html">Courses</a></li>
+<li><a href="admission.html">Admission</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="result.html">Result</a></li>
+<li><a href="verify.html">Verify Certificate</a></li>
+<li><a href="student-login.html">Student Login</a></li>
+<li><a href="contact.html">Contact</a></li>
+
+</ul>
+
+</nav>
 
 <section class="hero">
 
@@ -201,6 +208,12 @@ Our mission is to provide quality computer education with practical training so 
 <button onclick="topFunction()" id="topBtn">↑</button>
 
 <script src="js/script.js"></script>
+<script>
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("show");
+}
+</script>
 
+<script src="js/script.js"></script>
 </body>
 </html>
