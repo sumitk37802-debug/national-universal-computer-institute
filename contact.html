@@ -32,7 +32,13 @@ emailjs.init("wl5Hs2_O5Puvs27cR");
 </header>
 
 <nav>
-<ul>
+
+<div class="menu-toggle" onclick="toggleMenu()">
+☰
+</div>
+
+<ul id="menu">
+
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="courses.html">Courses</a></li>
@@ -42,7 +48,9 @@ emailjs.init("wl5Hs2_O5Puvs27cR");
 <li><a href="verify.html">Verify Certificate</a></li>
 <li><a href="student-login.html">Student Login</a></li>
 <li><a href="contact.html">Contact</a></li>
+
 </ul>
+
 </nav>
 
 <section class="services">
@@ -127,6 +135,12 @@ btn.disabled=false;
 });
 
 </script>
+<script>
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("show");
+}
+</script>
 
+<script src="js/script.js"></script>
 </body>
 </html>
